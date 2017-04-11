@@ -1,0 +1,1196 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-kafka-node/kafka-node/lib/consumer.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-kafka-node">npmtest-kafka-node (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-kafka-node/kafka-node/lib/consumer.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">14.93% <small>(30 / 201)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 106)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">2.17% <small>(1 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">16.67% <small>(30 / 180)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-kafka-node/kafka-node/lib/</a> &#187; consumer.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+var util = require('util');
+var _ = require('lodash');
+var events = require('events');
+var logger = require('./logging')('kafka-node:Consumer');
+var utils = require('./utils');
+&nbsp;
+var DEFAULTS = {
+  groupId: 'kafka-node-group',
+  // Auto commit config
+  autoCommit: true,
+  autoCommitIntervalMs: 5000,
+  // Fetch message config
+  fetchMaxWaitMs: 100,
+  fetchMinBytes: 1,
+  fetchMaxBytes: 1024 * 1024,
+  fromOffset: false,
+  encoding: 'utf8'
+};
+&nbsp;
+var nextId = (function () {
+  var id = 0;
+  return <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return id++;</span>
+  };
+})();
+&nbsp;
+var Consumer = <span class="fstat-no" title="function not covered" >function (client, topics, options) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!topics) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error('Must have payloads');</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  utils.validateTopics(topics);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.fetchCount = 0;</span>
+<span class="cstat-no" title="statement not covered" >  this.client = client;</span>
+<span class="cstat-no" title="statement not covered" >  this.options = _.defaults((options || {}), DEFAULTS);</span>
+<span class="cstat-no" title="statement not covered" >  this.ready = false;</span>
+<span class="cstat-no" title="statement not covered" >  this.paused = this.options.paused;</span>
+<span class="cstat-no" title="statement not covered" >  this.id = nextId();</span>
+<span class="cstat-no" title="statement not covered" >  this.payloads = this.buildPayloads(topics);</span>
+<span class="cstat-no" title="statement not covered" >  this.connect();</span>
+<span class="cstat-no" title="statement not covered" >  this.encoding = this.options.encoding;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.options.groupId) {</span>
+<span class="cstat-no" title="statement not covered" >    utils.validateConfig('options.groupId', this.options.groupId);</span>
+  }
+};
+util.inherits(Consumer, events.EventEmitter);
+&nbsp;
+Consumer.prototype.buildPayloads = <span class="fstat-no" title="function not covered" >function (payloads) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  return payloads.map(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (typeof p !== 'object') <span class="cstat-no" title="statement not covered" >p = { topic: p };</span></span>
+<span class="cstat-no" title="statement not covered" >    p.partition = p.partition || 0;</span>
+<span class="cstat-no" title="statement not covered" >    p.offset = p.offset || 0;</span>
+<span class="cstat-no" title="statement not covered" >    p.maxBytes = self.options.fetchMaxBytes;</span>
+<span class="cstat-no" title="statement not covered" >    p.metadata = 'm'; </span>// metadata can be arbitrary
+<span class="cstat-no" title="statement not covered" >    return p;</span>
+  });
+};
+&nbsp;
+Consumer.prototype.connect = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+  // Client already exists
+<span class="cstat-no" title="statement not covered" >  this.ready = this.client.ready;</span>
+<span class="cstat-no" title="statement not covered" >  if (this.ready) <span class="cstat-no" title="statement not covered" >this.init();</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.on('ready', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    logger.debug('consumer ready');</span>
+<span class="cstat-no" title="statement not covered" >    if (!self.ready) <span class="cstat-no" title="statement not covered" >self.init();</span></span>
+<span class="cstat-no" title="statement not covered" >    self.ready = true;</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >    logger.error('client error %s', err.message);</span>
+<span class="cstat-no" title="statement not covered" >    self.emit('error', err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.on('close', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    logger.debug('connection closed');</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.on('brokersChanged', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    var topicNames = self.payloads.map(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return p.topic;</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.refreshMetadata(topicNames, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (err) <span class="cstat-no" title="statement not covered" >return self.emit('error', err);</span></span>
+<span class="cstat-no" title="statement not covered" >      self.fetch();</span>
+    });
+  });
+  // 'done' will be emit when a message fetch request complete
+<span class="cstat-no" title="statement not covered" >  this.on('done', <span class="fstat-no" title="function not covered" >function (topics) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.updateOffsets(topics);</span>
+<span class="cstat-no" title="statement not covered" >    setImmediate(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.fetch();</span>
+    });
+  });
+};
+&nbsp;
+Consumer.prototype.init = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  if (!this.payloads.length) {</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  var topics = self.payloads.map(<span class="fstat-no" title="function not covered" >function (p) {</span> <span class="cstat-no" title="statement not covered" >return p.topic; </span>});</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  self.client.topicExists(topics, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >      return self.emit('error', err);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (self.options.fromOffset) {</span>
+<span class="cstat-no" title="statement not covered" >      return self.fetch();</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.fetchOffset(self.payloads, <span class="fstat-no" title="function not covered" >function (err, topics) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >        return self.emit('error', err);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      self.updateOffsets(topics, true);</span>
+<span class="cstat-no" title="statement not covered" >      self.fetch();</span>
+    });
+  });
+};
+&nbsp;
+/*
+ * Update offset info in current payloads
+ * @param {Object} Topic-partition-offset
+ * @param {Boolean} Don't commit when initing consumer
+ */
+Consumer.prototype.updateOffsets = <span class="fstat-no" title="function not covered" >function (topics, initing) {</span>
+<span class="cstat-no" title="statement not covered" >  this.payloads.forEach(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!_.isEmpty(topics[p.topic]) &amp;&amp; topics[p.topic][p.partition] !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >      var offset = topics[p.topic][p.partition];</span>
+<span class="cstat-no" title="statement not covered" >      if (offset === -1) <span class="cstat-no" title="statement not covered" >offset = 0;</span></span>
+<span class="cstat-no" title="statement not covered" >      if (!initing) <span class="cstat-no" title="statement not covered" >p.offset = offset + 1;</span></span>
+      else <span class="cstat-no" title="statement not covered" >p.offset = offset;</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.options.autoCommit &amp;&amp; !initing) {</span>
+<span class="cstat-no" title="statement not covered" >    this.autoCommit(false, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >      err &amp;&amp; logger.debug('auto commit offset', err);</span>
+    });
+  }
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function autoCommit (force, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  if (arguments.length === 1) {</span>
+<span class="cstat-no" title="statement not covered" >    cb = force;</span>
+<span class="cstat-no" title="statement not covered" >    force = false;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.committing &amp;&amp; !force) <span class="cstat-no" title="statement not covered" >return cb(null, 'Offset committing');</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.committing = true;</span>
+<span class="cstat-no" title="statement not covered" >  setTimeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    this.committing = false;</span>
+  }.bind(this), this.options.autoCommitIntervalMs);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var payloads = this.payloads;</span>
+<span class="cstat-no" title="statement not covered" >  if (this.pausedPayloads) <span class="cstat-no" title="statement not covered" >payloads = payloads.concat(this.pausedPayloads);</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var commits = payloads.filter(<span class="fstat-no" title="function not covered" >function (p) {</span> <span class="cstat-no" title="statement not covered" >return p.offset !== 0; </span>});</span>
+<span class="cstat-no" title="statement not covered" >  if (commits.length) {</span>
+<span class="cstat-no" title="statement not covered" >    this.client.sendOffsetCommitRequest(this.options.groupId, commits, cb);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    cb(null, 'Nothing to be committed');</span>
+  }
+}
+Consumer.prototype.commit = Consumer.prototype.autoCommit = autoCommit;
+&nbsp;
+Consumer.prototype.fetch = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  if (!this.ready || this.paused) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >  this.client.sendFetchRequest(this, this.payloads, this.options.fetchMaxWaitMs, this.options.fetchMinBytes);</span>
+};
+&nbsp;
+Consumer.prototype.fetchOffset = <span class="fstat-no" title="function not covered" >function (payloads, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  this.client.sendOffsetFetchRequest(this.options.groupId, payloads, cb);</span>
+};
+&nbsp;
+Consumer.prototype.addTopics = <span class="fstat-no" title="function not covered" >function (topics, cb, fromOffset) {</span>
+<span class="cstat-no" title="statement not covered" >  fromOffset = !!fromOffset;</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  if (!this.ready) {</span>
+<span class="cstat-no" title="statement not covered" >    setTimeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.addTopics(topics, cb, fromOffset);</span>
+    }
+    , 100);
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+  // The default is that the topics is a string array of topic names
+<span class="cstat-no" title="statement not covered" >  var topicNames = topics;</span>
+&nbsp;
+  // If the topics is actually an object and not string we assume it is an array of payloads
+<span class="cstat-no" title="statement not covered" >  if (typeof topics[0] === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >    topicNames = topics.map(<span class="fstat-no" title="function not covered" >function (p) {</span> <span class="cstat-no" title="statement not covered" >return p.topic; </span>});</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.addTopics(</span>
+    topicNames,
+<span class="fstat-no" title="function not covered" >    function (err, added) {</span>
+<span class="cstat-no" title="statement not covered" >      if (err) <span class="cstat-no" title="statement not covered" >return cb &amp;&amp; cb(err, added);</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var payloads = self.buildPayloads(topics);</span>
+<span class="cstat-no" title="statement not covered" >      var reFetch = !self.payloads.length;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (fromOffset) {</span>
+<span class="cstat-no" title="statement not covered" >        payloads.forEach(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >          self.payloads.push(p);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        if (reFetch) <span class="cstat-no" title="statement not covered" >self.fetch();</span></span>
+<span class="cstat-no" title="statement not covered" >        cb &amp;&amp; cb(null, added);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+&nbsp;
+      // update offset of topics that will be added
+<span class="cstat-no" title="statement not covered" >      self.fetchOffset(payloads, <span class="fstat-no" title="function not covered" >function (err, offsets) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) <span class="cstat-no" title="statement not covered" >return cb(err);</span></span>
+<span class="cstat-no" title="statement not covered" >        payloads.forEach(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var offset = offsets[p.topic][p.partition];</span>
+<span class="cstat-no" title="statement not covered" >          if (offset === -1) <span class="cstat-no" title="statement not covered" >offset = 0;</span></span>
+<span class="cstat-no" title="statement not covered" >          p.offset = offset;</span>
+<span class="cstat-no" title="statement not covered" >          self.payloads.push(p);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        if (reFetch) <span class="cstat-no" title="statement not covered" >self.fetch();</span></span>
+<span class="cstat-no" title="statement not covered" >        cb &amp;&amp; cb(null, added);</span>
+      });
+    }
+  );
+};
+&nbsp;
+Consumer.prototype.removeTopics = <span class="fstat-no" title="function not covered" >function (topics, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  topics = typeof topics === 'string' ? [topics] : topics;</span>
+<span class="cstat-no" title="statement not covered" >  this.payloads = this.payloads.filter(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return !~topics.indexOf(p.topic);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.removeTopicMetadata(topics, cb);</span>
+};
+&nbsp;
+Consumer.prototype.close = <span class="fstat-no" title="function not covered" >function (force, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  this.ready = false;</span>
+<span class="cstat-no" title="statement not covered" >  if (typeof force === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >    cb = force;</span>
+<span class="cstat-no" title="statement not covered" >    force = false;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (force) {</span>
+<span class="cstat-no" title="statement not covered" >    this.commit(force, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (err) {</span>
+<span class="cstat-no" title="statement not covered" >        return cb(err);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this.client.close(cb);</span>
+    }.bind(this));
+  } else {
+<span class="cstat-no" title="statement not covered" >    this.client.close(cb);</span>
+  }
+};
+&nbsp;
+Consumer.prototype.setOffset = <span class="fstat-no" title="function not covered" >function (topic, partition, offset) {</span>
+<span class="cstat-no" title="statement not covered" >  this.payloads.every(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (p.topic === topic &amp;&amp; p.partition == partition) { // eslint-disable-line eqeqeq</span>
+<span class="cstat-no" title="statement not covered" >      p.offset = offset;</span>
+<span class="cstat-no" title="statement not covered" >      return false;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return true;</span>
+  });
+};
+&nbsp;
+Consumer.prototype.pause = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  this.paused = true;</span>
+};
+&nbsp;
+Consumer.prototype.resume = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  this.paused = false;</span>
+<span class="cstat-no" title="statement not covered" >  this.fetch();</span>
+};
+&nbsp;
+Consumer.prototype.pauseTopics = <span class="fstat-no" title="function not covered" >function (topics) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!this.pausedPayloads) <span class="cstat-no" title="statement not covered" >this.pausedPayloads = [];</span></span>
+<span class="cstat-no" title="statement not covered" >  pauseOrResume(this.payloads, this.pausedPayloads, topics);</span>
+};
+&nbsp;
+Consumer.prototype.resumeTopics = <span class="fstat-no" title="function not covered" >function (topics) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!this.pausedPayloads) <span class="cstat-no" title="statement not covered" >this.pausedPayloads = [];</span></span>
+<span class="cstat-no" title="statement not covered" >  var reFetch = !this.payloads.length;</span>
+<span class="cstat-no" title="statement not covered" >  pauseOrResume(this.pausedPayloads, this.payloads, topics);</span>
+<span class="cstat-no" title="statement not covered" >  reFetch = reFetch &amp;&amp; this.payloads.length;</span>
+<span class="cstat-no" title="statement not covered" >  if (reFetch) <span class="cstat-no" title="statement not covered" >this.fetch();</span></span>
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function pauseOrResume (payloads, nextPayloads, topics) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!topics || !topics.length) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  for (var i = 0, j = 0, l = payloads.length; j &lt; l; i++, j++) {</span>
+<span class="cstat-no" title="statement not covered" >    if (isInTopics(payloads[i])) {</span>
+<span class="cstat-no" title="statement not covered" >      nextPayloads.push(</span>
+        payloads.splice(i, 1)[0]
+      );
+<span class="cstat-no" title="statement not covered" >      i--;</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function isInTopics (p) {</span>
+<span class="cstat-no" title="statement not covered" >    return topics.some(<span class="fstat-no" title="function not covered" >function (topic) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (typeof topic === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        return p.topic === topic;</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        return p.topic === topic.topic &amp;&amp; p.partition === topic.partition;</span>
+      }
+    });
+  }
+}
+&nbsp;
+module.exports = Consumer;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 17:28:21 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>

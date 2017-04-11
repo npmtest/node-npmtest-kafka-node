@@ -1,0 +1,1853 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-kafka-node/kafka-node/lib/consumerGroup.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-kafka-node">npmtest-kafka-node (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-kafka-node/kafka-node/lib/consumerGroup.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">14.63% <small>(43 / 294)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 102)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 55)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">14.63% <small>(43 / 294)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-kafka-node/kafka-node/lib/</a> &#187; consumerGroup.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+const logger = require('./logging')('kafka-node:ConsumerGroup');
+const util = require('util');
+const EventEmitter = require('events');
+const highLevelConsumer = require('./highLevelConsumer');
+const Client = require('./client');
+const Offset = require('./offset');
+const _ = require('lodash');
+const async = require('async');
+const validateConfig = require('./utils').validateConfig;
+const ConsumerGroupRecovery = require('./consumerGroupRecovery');
+const Heartbeat = require('./consumerGroupHeartbeat');
+const createTopicPartitionList = require('./utils').createTopicPartitionList;
+const errors = require('./errors');
+&nbsp;
+const assert = require('assert');
+const builtInProtocols = require('./assignment');
+&nbsp;
+const LATEST_OFFSET = -1;
+const EARLIEST_OFFSET = -2;
+const ACCEPTED_FROM_OFFSET = {
+  latest: LATEST_OFFSET,
+  earliest: EARLIEST_OFFSET,
+  none: false
+};
+&nbsp;
+const DEFAULTS = {
+  groupId: 'kafka-node-group',
+  // Auto commit config
+  autoCommit: true,
+  autoCommitIntervalMs: 5000,
+  // Fetch message config
+  fetchMaxWaitMs: 100,
+  paused: false,
+  maxNumSegments: 1000,
+  fetchMinBytes: 1,
+  fetchMaxBytes: 1024 * 1024,
+  maxTickMessages: 1000,
+  fromOffset: 'latest',
+  outOfRangeOffset: 'earliest',
+  sessionTimeout: 30000,
+  retries: 10,
+  retryFactor: 1.8,
+  retryMinTimeout: 1000,
+  connectOnReady: true,
+  migrateHLC: false,
+  migrateRolling: true,
+  protocol: ['roundrobin']
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function ConsumerGroup (memberOptions, topics) {</span>
+<span class="cstat-no" title="statement not covered" >  EventEmitter.call(this);</span>
+<span class="cstat-no" title="statement not covered" >  const self = this;</span>
+<span class="cstat-no" title="statement not covered" >  this.options = _.defaults((memberOptions || {}), DEFAULTS);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!this.options.heartbeatInterval) {</span>
+<span class="cstat-no" title="statement not covered" >    this.options.heartbeatInterval = Math.floor(this.options.sessionTimeout / 3);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (memberOptions.ssl === true) {</span>
+<span class="cstat-no" title="statement not covered" >    memberOptions.ssl = {};</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!(this.options.fromOffset in ACCEPTED_FROM_OFFSET)) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error(`fromOffset ${this.options.fromOffset} should be either: ${Object.keys(ACCEPTED_FROM_OFFSET).join(', ')}`);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!(this.options.outOfRangeOffset in ACCEPTED_FROM_OFFSET)) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error(`outOfRangeOffset ${this.options.outOfRangeOffset} should be either: ${Object.keys(ACCEPTED_FROM_OFFSET).join(', ')}`);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client = new Client(memberOptions.host, memberOptions.id, memberOptions.zk,</span>
+    memberOptions.batch, memberOptions.ssl);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (_.isString(topics)) {</span>
+<span class="cstat-no" title="statement not covered" >    topics = [topics];</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  assert(Array.isArray(topics), 'Array of topics is required');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.topics = topics;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.recovery = new ConsumerGroupRecovery(this);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.setupProtocols(this.options.protocol);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.options.connectOnReady &amp;&amp; !this.options.migrateHLC) {</span>
+<span class="cstat-no" title="statement not covered" >    this.client.once('ready', this.connect.bind(this));</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.options.migrateHLC) {</span>
+<span class="cstat-no" title="statement not covered" >    const ConsumerGroupMigrator = require('./consumerGroupMigrator');</span>
+<span class="cstat-no" title="statement not covered" >    this.migrator = new ConsumerGroupMigrator(this);</span>
+<span class="cstat-no" title="statement not covered" >    this.migrator.on('error', <span class="fstat-no" title="function not covered" >function (error) {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.emit('error', error);</span>
+    });
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.on('error', <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >    logger.error('Error from %s', self.client.clientId, err);</span>
+<span class="cstat-no" title="statement not covered" >    self.emit('error', err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const recoverFromBrokerChange = _.debounce(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    logger.debug('brokersChanged refreshing metadata');</span>
+<span class="cstat-no" title="statement not covered" >    self.client.refreshMetadata(self.topics, <span class="fstat-no" title="function not covered" >function (error) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (error) {</span>
+<span class="cstat-no" title="statement not covered" >        self.emit(error);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      self.paused = false;</span>
+<span class="cstat-no" title="statement not covered" >      if (!self.ready &amp;&amp; !self.connecting) {</span>
+<span class="cstat-no" title="statement not covered" >        if (self.reconnectTimer) {</span>
+          // brokers changed so bypass backoff retry and reconnect now
+<span class="cstat-no" title="statement not covered" >          clearTimeout(self.reconnectTimer);</span>
+<span class="cstat-no" title="statement not covered" >          self.reconnectTimer = null;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        self.connect();</span>
+      } else <span class="cstat-no" title="statement not covered" >if (!self.connecting) {</span>
+<span class="cstat-no" title="statement not covered" >        self.fetch();</span>
+      }
+    });
+  }, 200);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.on('brokersChanged', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.pause();</span>
+<span class="cstat-no" title="statement not covered" >    recoverFromBrokerChange();</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.client.on('reconnect', <span class="fstat-no" title="function not covered" >function (lastError) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.fetch();</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.on('offsetOutOfRange', topic =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this.pause();</span>
+<span class="cstat-no" title="statement not covered" >    if (this.options.outOfRangeOffset === 'none') {</span>
+<span class="cstat-no" title="statement not covered" >      this.emit('error', new errors.InvalidConsumerOffsetError(`Offset out of range for topic "${topic.topic}" partition ${topic.partition}`));</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    topic.time = ACCEPTED_FROM_OFFSET[this.options.outOfRangeOffset];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.getOffset().fetch([topic], (error, result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (error) {</span>
+<span class="cstat-no" title="statement not covered" >        this.emit('error', new errors.InvalidConsumerOffsetError(`Fetching ${this.options.outOfRangeOffset} offset failed`, error));</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      const offset = _.head(result[topic.topic][topic.partition]);</span>
+<span class="cstat-no" title="statement not covered" >      const oldOffset = _.find(this.topicPayloads, {topic: topic.topic, partition: topic.partition}).offset;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      logger.debug('replacing %s-%s stale offset of %d with %d', topic.topic, topic.partition, oldOffset, offset);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.setOffset(topic.topic, topic.partition, offset);</span>
+<span class="cstat-no" title="statement not covered" >      this.resume();</span>
+    });
+  });
+&nbsp;
+  // 'done' will be emit when a message fetch request complete
+<span class="cstat-no" title="statement not covered" >  this.on('done', <span class="fstat-no" title="function not covered" >function (topics) {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.updateOffsets(topics);</span>
+<span class="cstat-no" title="statement not covered" >    if (!self.paused) {</span>
+<span class="cstat-no" title="statement not covered" >      setImmediate(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.fetch();</span>
+      });
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.options.groupId) {</span>
+<span class="cstat-no" title="statement not covered" >    validateConfig('options.groupId', this.options.groupId);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.isLeader = false;</span>
+<span class="cstat-no" title="statement not covered" >  this.coordinatorId = null;</span>
+<span class="cstat-no" title="statement not covered" >  this.generationId = null;</span>
+<span class="cstat-no" title="statement not covered" >  this.ready = false;</span>
+<span class="cstat-no" title="statement not covered" >  this.topicPayloads = [];</span>
+}
+&nbsp;
+util.inherits(ConsumerGroup, highLevelConsumer);
+&nbsp;
+ConsumerGroup.prototype.setupProtocols = <span class="fstat-no" title="function not covered" >function (protocols) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!Array.isArray(protocols)) {</span>
+<span class="cstat-no" title="statement not covered" >    protocols = [protocols];</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.protocols = protocols.map(<span class="fstat-no" title="function not covered" >function (protocol) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (typeof protocol === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >      if (!(protocol in builtInProtocols)) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('Unknown built in assignment protocol ' + protocol);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      protocol = _.assign({}, builtInProtocols[protocol]);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      checkProtocol(protocol);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    protocol.subscription = this.topics;</span>
+<span class="cstat-no" title="statement not covered" >    return protocol;</span>
+  }, this);
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function checkProtocol (protocol) {</span>
+<span class="cstat-no" title="statement not covered" >  assert(protocol, 'protocol is null');</span>
+<span class="cstat-no" title="statement not covered" >  assert(protocol.assign, 'assign function is not defined in the protocol');</span>
+<span class="cstat-no" title="statement not covered" >  assert(protocol.name, 'name must be given to protocol');</span>
+<span class="cstat-no" title="statement not covered" >  assert(protocol.version &gt;= 0, 'version must be &gt;= 0');</span>
+}
+&nbsp;
+ConsumerGroup.prototype.setCoordinatorId = <span class="fstat-no" title="function not covered" >function (coordinatorId) {</span>
+<span class="cstat-no" title="statement not covered" >  this.client.coordinatorId = String(coordinatorId);</span>
+};
+&nbsp;
+ConsumerGroup.prototype.assignPartitions = <span class="fstat-no" title="function not covered" >function (protocol, groupMembers, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  logger.debug('Assigning Partitions to members', groupMembers);</span>
+<span class="cstat-no" title="statement not covered" >  logger.debug('Using group protocol', protocol);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  protocol = _.find(this.protocols, {name: protocol});</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  var topics = _(groupMembers).map('subscription').flatten().uniq().value();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  async.waterfall([</span>
+<span class="fstat-no" title="function not covered" >    function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >      logger.debug('loadingMetadata for topics:', topics);</span>
+<span class="cstat-no" title="statement not covered" >      self.client.loadMetadataForTopics(topics, callback);</span>
+    },
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function (metadataResponse, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      var metadata = mapTopicToPartitions(metadataResponse[1].metadata);</span>
+<span class="cstat-no" title="statement not covered" >      logger.debug('mapTopicToPartitions', metadata);</span>
+<span class="cstat-no" title="statement not covered" >      protocol.assign(metadata, groupMembers, callback);</span>
+    }
+  ], callback);
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function mapTopicToPartitions (metadata) {</span>
+<span class="cstat-no" title="statement not covered" >  return _.mapValues(metadata, Object.keys);</span>
+}
+&nbsp;
+ConsumerGroup.prototype.handleJoinGroup = <span class="fstat-no" title="function not covered" >function (joinGroupResponse, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  logger.debug('joinGroupResponse %j from %s', joinGroupResponse, this.client.clientId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.isLeader = (joinGroupResponse.leaderId === joinGroupResponse.memberId);</span>
+<span class="cstat-no" title="statement not covered" >  this.generationId = joinGroupResponse.generationId;</span>
+<span class="cstat-no" title="statement not covered" >  this.memberId = joinGroupResponse.memberId;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var groupAssignment;</span>
+<span class="cstat-no" title="statement not covered" >  if (this.isLeader) {</span>
+    // assign partitions
+<span class="cstat-no" title="statement not covered" >    return this.assignPartitions(joinGroupResponse.groupProtocol, joinGroupResponse.members, callback);</span>
+  }
+<span class="cstat-no" title="statement not covered" >  callback(null, groupAssignment);</span>
+};
+&nbsp;
+ConsumerGroup.prototype.saveDefaultOffsets = <span class="fstat-no" title="function not covered" >function (topicPartitionList, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  const offsetPayload = _(topicPartitionList).cloneDeep().map(tp =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    tp.time = ACCEPTED_FROM_OFFSET[this.options.fromOffset];</span>
+<span class="cstat-no" title="statement not covered" >    return tp;</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  self.getOffset().fetch(offsetPayload, <span class="fstat-no" title="function not covered" >function (error, result) {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (error) {</span>
+<span class="cstat-no" title="statement not covered" >      return callback(error);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    self.defaultOffsets = _.mapValues(result, <span class="fstat-no" title="function not covered" >function (partitionOffsets) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return _.mapValues(partitionOffsets, _.head);</span>
+    });
+<span class="cstat-no" title="statement not covered" >    callback(null);</span>
+  });
+};
+&nbsp;
+ConsumerGroup.prototype.handleSyncGroup = <span class="fstat-no" title="function not covered" >function (syncGroupResponse, callback) {</span>
+<span class="cstat-no" title="statement not covered" >  logger.debug('SyncGroup Response');</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  var ownedTopics = Object.keys(syncGroupResponse.partitions);</span>
+<span class="cstat-no" title="statement not covered" >  if (ownedTopics.length) {</span>
+<span class="cstat-no" title="statement not covered" >    logger.debug('%s owns topics: ', self.client.clientId, syncGroupResponse.partitions);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const topicPartitionList = createTopicPartitionList(syncGroupResponse.partitions);</span>
+<span class="cstat-no" title="statement not covered" >    const useDefaultOffsets = self.options.fromOffset in ACCEPTED_FROM_OFFSET;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    async.waterfall([</span>
+<span class="fstat-no" title="function not covered" >      function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >        self.fetchOffset(syncGroupResponse.partitions, callback);</span>
+      },
+<span class="fstat-no" title="function not covered" >      function (offsets, callback) {</span>
+<span class="cstat-no" title="statement not covered" >        logger.debug('%s fetchOffset Response: %j', self.client.clientId, offsets);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var noOffset = topicPartitionList.some(<span class="fstat-no" title="function not covered" >function (tp) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return offsets[tp.topic][tp.partition] === -1;</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (noOffset) {</span>
+<span class="cstat-no" title="statement not covered" >          logger.debug('No saved offsets');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (self.options.fromOffset === 'none') {</span>
+<span class="cstat-no" title="statement not covered" >            return callback(new Error(`${self.client.clientId} owns topics and partitions which contains no saved offsets for group '${self.options.groupId}'`));</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          async.parallel([</span>
+<span class="fstat-no" title="function not covered" >            function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >              if (self.migrator) {</span>
+<span class="cstat-no" title="statement not covered" >                return self.migrator.saveHighLevelConsumerOffsets(topicPartitionList, callback);</span>
+              }
+<span class="cstat-no" title="statement not covered" >              callback(null);</span>
+            },
+<span class="fstat-no" title="function not covered" >            function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >              if (useDefaultOffsets) {</span>
+<span class="cstat-no" title="statement not covered" >                return self.saveDefaultOffsets(topicPartitionList, callback);</span>
+              }
+<span class="cstat-no" title="statement not covered" >              callback(null);</span>
+            }
+          ], <span class="fstat-no" title="function not covered" >function (error) {</span>
+<span class="cstat-no" title="statement not covered" >            if (error) {</span>
+<span class="cstat-no" title="statement not covered" >              return callback(error);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            logger.debug('%s defaultOffset Response for %s: %j', self.client.clientId, self.options.fromOffset, self.defaultOffsets);</span>
+<span class="cstat-no" title="statement not covered" >            callback(null, offsets);</span>
+          });
+        } else {
+<span class="cstat-no" title="statement not covered" >          logger.debug('Has saved offsets');</span>
+<span class="cstat-no" title="statement not covered" >          callback(null, offsets);</span>
+        }
+      },
+<span class="fstat-no" title="function not covered" >      function (offsets, callback) {</span>
+<span class="cstat-no" title="statement not covered" >        self.topicPayloads = self.buildPayloads(topicPartitionList).map(<span class="fstat-no" title="function not covered" >function (p) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var offset = offsets[p.topic][p.partition];</span>
+<span class="cstat-no" title="statement not covered" >          if (offset === -1) { // -1 means no offset was saved for this topic/partition combo</span>
+<span class="cstat-no" title="statement not covered" >            offset = useDefaultOffsets ? self.getDefaultOffset(p, 0) : 0;</span>
+<span class="cstat-no" title="statement not covered" >            if (self.migrator) {</span>
+<span class="cstat-no" title="statement not covered" >              offset = self.migrator.getOffset(p, offset);</span>
+            }
+          }
+<span class="cstat-no" title="statement not covered" >          p.offset = offset;</span>
+<span class="cstat-no" title="statement not covered" >          return p;</span>
+        });
+<span class="cstat-no" title="statement not covered" >        callback(null, true);</span>
+      }
+    ], callback);
+  } else { // no partitions assigned
+<span class="cstat-no" title="statement not covered" >    callback(null, false);</span>
+  }
+};
+&nbsp;
+ConsumerGroup.prototype.getDefaultOffset = <span class="fstat-no" title="function not covered" >function (tp, defaultOffset) {</span>
+<span class="cstat-no" title="statement not covered" >  return _.get(this.defaultOffsets, [tp.topic, tp.partition], defaultOffset);</span>
+};
+&nbsp;
+ConsumerGroup.prototype.getOffset = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  if (this.offset) {</span>
+<span class="cstat-no" title="statement not covered" >    return this.offset;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  this.offset = new Offset(this.client);</span>
+  // we can ignore this since we are already forwarding error event emitted from client
+<span class="cstat-no" title="statement not covered" >  this.offset.on('error', _.noop);</span>
+<span class="cstat-no" title="statement not covered" >  return this.offset;</span>
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function emptyStrIfNull (value) {</span>
+<span class="cstat-no" title="statement not covered" >  return value == null ? '' : value;</span>
+}
+&nbsp;
+ConsumerGroup.prototype.connect = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  if (this.connecting) {</span>
+<span class="cstat-no" title="statement not covered" >    logger.warn('Connect ignored. Currently connecting.');</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.debug('Connecting %s', this.client.clientId);</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.connecting = true;</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('rebalancing');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  async.waterfall([</span>
+<span class="fstat-no" title="function not covered" >    function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >      if (self.client.coordinatorId) {</span>
+<span class="cstat-no" title="statement not covered" >        return callback(null, null);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      self.client.sendGroupCoordinatorRequest(self.options.groupId, callback);</span>
+    },
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function (coordinatorInfo, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      logger.debug('GroupCoordinator Response:', coordinatorInfo);</span>
+<span class="cstat-no" title="statement not covered" >      if (coordinatorInfo) {</span>
+<span class="cstat-no" title="statement not covered" >        self.setCoordinatorId(coordinatorInfo.coordinatorId);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      self.client.sendJoinGroupRequest(self.options.groupId, emptyStrIfNull(self.memberId), self.options.sessionTimeout, self.protocols, callback);</span>
+    },
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function (joinGroupResponse, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      self.handleJoinGroup(joinGroupResponse, callback);</span>
+    },
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function (groupAssignment, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      logger.debug('SyncGroup Request from %s', self.memberId);</span>
+<span class="cstat-no" title="statement not covered" >      self.client.sendSyncGroupRequest(self.options.groupId, self.generationId, self.memberId, groupAssignment, callback);</span>
+    },
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function (syncGroupResponse, callback) {</span>
+<span class="cstat-no" title="statement not covered" >      self.handleSyncGroup(syncGroupResponse, callback);</span>
+    }
+  ], <span class="fstat-no" title="function not covered" >function (error, startFetch) {</span>
+<span class="cstat-no" title="statement not covered" >    self.connecting = false;</span>
+<span class="cstat-no" title="statement not covered" >    self.rebalancing = false;</span>
+<span class="cstat-no" title="statement not covered" >    if (error) {</span>
+<span class="cstat-no" title="statement not covered" >      return self.recovery.tryToRecoverFrom(error, 'connect');</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    self.ready = true;</span>
+<span class="cstat-no" title="statement not covered" >    self.recovery.clearError();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    logger.debug('generationId', self.generationId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (startFetch) {</span>
+<span class="cstat-no" title="statement not covered" >      self.fetch();</span>
+    }
+<span class="cstat-no" title="statement not covered" >    self.startHeartbeats();</span>
+<span class="cstat-no" title="statement not covered" >    self.emit('connect');</span>
+<span class="cstat-no" title="statement not covered" >    self.emit('rebalanced');</span>
+  });
+};
+&nbsp;
+ConsumerGroup.prototype.scheduleReconnect = <span class="fstat-no" title="function not covered" >function (timeout) {</span>
+<span class="cstat-no" title="statement not covered" >  assert(timeout);</span>
+<span class="cstat-no" title="statement not covered" >  this.rebalancing = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.reconnectTimer) {</span>
+<span class="cstat-no" title="statement not covered" >    clearTimeout(this.reconnectTimer);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  this.reconnectTimer = setTimeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >    self.reconnectTimer = null;</span>
+<span class="cstat-no" title="statement not covered" >    self.connect();</span>
+  }, timeout);
+};
+&nbsp;
+ConsumerGroup.prototype.startHeartbeats = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  assert(this.options.sessionTimeout &gt; 0);</span>
+<span class="cstat-no" title="statement not covered" >  assert(this.ready, 'consumerGroup is not ready');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const heartbeatIntervalMs = this.options.heartbeatInterval || (Math.floor(this.options.sessionTimeout / 3));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  logger.debug('%s started heartbeats at every %d ms', this.client.clientId, heartbeatIntervalMs);</span>
+<span class="cstat-no" title="statement not covered" >  this.stopHeartbeats();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  let heartbeat = this.sendHeartbeat();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.heartbeatInterval = setInterval(() =&gt; {</span>
+    // only send another heartbeat if we got a response from the last one
+<span class="cstat-no" title="statement not covered" >    if (heartbeat.verifyResolved()) {</span>
+<span class="cstat-no" title="statement not covered" >      heartbeat = this.sendHeartbeat();</span>
+    }
+  }, heartbeatIntervalMs);
+};
+&nbsp;
+ConsumerGroup.prototype.stopHeartbeats = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  this.heartbeatInterval &amp;&amp; clearInterval(this.heartbeatInterval);</span>
+};
+&nbsp;
+ConsumerGroup.prototype.leaveGroup = <span class="fstat-no" title="function not covered" >function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >  logger.debug('%s leaving group', this.client.clientId);</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  this.stopHeartbeats();</span>
+<span class="cstat-no" title="statement not covered" >  if (self.generationId != null &amp;&amp; self.memberId) {</span>
+<span class="cstat-no" title="statement not covered" >    this.client.sendLeaveGroupRequest(this.options.groupId, this.memberId, <span class="fstat-no" title="function not covered" >function (error) {</span></span>
+<span class="cstat-no" title="statement not covered" >      self.generationId = null;</span>
+<span class="cstat-no" title="statement not covered" >      callback(error);</span>
+    });
+  } else {
+<span class="cstat-no" title="statement not covered" >    callback(null);</span>
+  }
+};
+&nbsp;
+ConsumerGroup.prototype.sendHeartbeat = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >  assert(this.memberId, 'invalid memberId');</span>
+<span class="cstat-no" title="statement not covered" >  assert(this.generationId &gt;= 0, 'invalid generationId');</span>
+  // logger.debug('%s ❤️  -&gt;', this.client.clientId);
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function heartbeatCallback (error) {</span>
+<span class="cstat-no" title="statement not covered" >    if (error) {</span>
+<span class="cstat-no" title="statement not covered" >      logger.warn('%s Heartbeat error:', self.client.clientId, error);</span>
+<span class="cstat-no" title="statement not covered" >      self.recovery.tryToRecoverFrom(error, 'heartbeat');</span>
+    }
+    // logger.debug('%s 💚 &lt;-', self.client.clientId, error);
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const heartbeat = new Heartbeat(this.client, heartbeatCallback);</span>
+<span class="cstat-no" title="statement not covered" >  heartbeat.send(this.options.groupId, this.generationId, this.memberId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return heartbeat;</span>
+};
+&nbsp;
+ConsumerGroup.prototype.fetchOffset = <span class="fstat-no" title="function not covered" >function (payloads, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  this.client.sendOffsetFetchV1Request(this.options.groupId, payloads, cb);</span>
+};
+&nbsp;
+ConsumerGroup.prototype.sendOffsetCommitRequest = <span class="fstat-no" title="function not covered" >function (commits, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  if (this.generationId &amp;&amp; this.memberId) {</span>
+<span class="cstat-no" title="statement not covered" >    this.client.sendOffsetCommitV2Request(this.options.groupId, this.generationId, this.memberId, commits, cb);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    cb(null, 'Nothing to be committed');</span>
+  }
+};
+&nbsp;
+ConsumerGroup.prototype.close = <span class="fstat-no" title="function not covered" >function (force, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  this.ready = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.stopHeartbeats();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof force === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >    cb = force;</span>
+<span class="cstat-no" title="statement not covered" >    force = false;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  async.series([</span>
+<span class="fstat-no" title="function not covered" >    function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >      if (force) {</span>
+<span class="cstat-no" title="statement not covered" >        self.commit(true, callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      callback(null);</span>
+    },
+<span class="fstat-no" title="function not covered" >    function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >      self.leaveGroup(<span class="fstat-no" title="function not covered" >function (error) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (error) {</span>
+<span class="cstat-no" title="statement not covered" >          logger.error('Leave group failed with', error);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        callback(null);</span>
+      });
+    },
+<span class="fstat-no" title="function not covered" >    function (callback) {</span>
+<span class="cstat-no" title="statement not covered" >      self.client.close(callback);</span>
+    }
+  ], cb);
+};
+&nbsp;
+module.exports = ConsumerGroup;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 17:28:21 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
