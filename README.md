@@ -1,4 +1,7 @@
-# test coverage for  [kafka-node (v1.6.0)](https://github.com/SOHU-Co/kafka-node#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-kafka-node.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-kafka-node) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-kafka-node.svg)](https://travis-ci.org/npmtest/node-npmtest-kafka-node)
+# npmtest-kafka-node
+
+#### basic test-coverage for  [kafka-node (v1.6.0)](https://github.com/SOHU-Co/kafka-node#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-kafka-node.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-kafka-node) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-kafka-node.svg)](https://travis-ci.org/npmtest/node-npmtest-kafka-node)
+
 #### Client for Apache Kafka v0.8+
 
 [![NPM](https://nodei.co/npm/kafka-node.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/kafka-node)
@@ -117,7 +120,8 @@
         "test": "eslint . && ./run-tests.sh && nsp check",
         "updateToc": "doctoc README.md --maxlevel 2 --notitle"
     },
-    "version": "1.6.0"
+    "version": "1.6.0",
+    "bin": {}
 }
 ```
 

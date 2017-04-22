@@ -1,6 +1,6 @@
 {
     "author": "kai zhu <kaizhu256@gmail.com>",
-    "description": "test coverage for [kafka-node (v1.6.0)](https://github.com/SOHU-Co/kafka-node#readme) [![npm package](https://img.shields.io/npm/v/npmtest-kafka-node.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-kafka-node) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-kafka-node.svg)](https://travis-ci.org/npmtest/node-npmtest-kafka-node)",
+    "description": "#### basic test-coverage for  [kafka-node (v1.6.0)](https://github.com/SOHU-Co/kafka-node#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-kafka-node.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-kafka-node) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-kafka-node.svg)](https://travis-ci.org/npmtest/node-npmtest-kafka-node)",
     "devDependencies": {
         "electron-lite": "kaizhu256/node-electron-lite#alpha",
         "kafka-node": "*",
@@ -36,5 +36,5 @@
         "start": "(set -e; export PORT=${PORT:-8080}; utility2 start test.js)",
         "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
     },
-    "version": "0.0.2"
+    "version": "2017.4.23"
 }
